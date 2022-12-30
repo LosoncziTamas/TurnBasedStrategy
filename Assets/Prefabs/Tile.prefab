@@ -114,6 +114,9 @@ MonoBehaviour:
   _obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  _highlightedColor: {r: 1, g: 0.78676474, b: 0, a: 1}
+  _isWalkable: 0
+  _gameMaster: {fileID: 0}
 --- !u!61 &5490158935733759942
 BoxCollider2D:
   m_ObjectHideFlags: 0
