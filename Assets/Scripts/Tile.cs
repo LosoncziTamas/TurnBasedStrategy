@@ -46,4 +46,13 @@ public class Tile : MonoBehaviour
         _spriteRenderer.color = Color.white;
         _isWalkable = false;
     }
+
+    private void OnMouseDown()
+    {
+        var unitCanWalkToThisTile = _isWalkable && _gameMaster.SelectedUnit != null;
+        if (unitCanWalkToThisTile)
+        {
+            _gameMaster.SelectedUnit.Move(transform.position);
+        }
+    }
 }

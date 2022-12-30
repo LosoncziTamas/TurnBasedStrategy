@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -6,6 +7,7 @@ public class Unit : MonoBehaviour
     
     [SerializeField] private int _tileSpeed;
     [SerializeField] private bool _hasMoved;
+    [SerializeField] private float _moveSpeed;
 
     private GameMaster _gameMaster;
     
@@ -31,6 +33,7 @@ public class Unit : MonoBehaviour
     {
         Selected = false;
         _gameMaster.SelectedUnit = null;
+        _gameMaster.ResetTiles();
     }
 
     private void Select(Unit toSelect)
@@ -41,6 +44,7 @@ public class Unit : MonoBehaviour
         }
         Selected = true;
         _gameMaster.SelectedUnit = toSelect;
+        _gameMaster.ResetTiles();
     }
 
     private void GetWalkableTiles()
@@ -66,5 +70,28 @@ public class Unit : MonoBehaviour
         var horizontalDistance = Mathf.Abs(tilePos.x - unitPos.x);
         var verticalDistance = Mathf.Abs(tilePos.y - unitPos.y);
         return horizontalDistance + verticalDistance <= _tileSpeed;
+    }
+
+    public void Move(Vector2 tilePos)
+    {
+        _gameMaster.ResetTiles();
+        StartCoroutine(StartMovement(tilePos));
+    }
+
+    private IEnumerator StartMovement(Vector2 tilePos)
+    {
+        while (!Mathf.Approximately(transform.position.x, tilePos.x))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(tilePos.x, transform.position.y),
+                _moveSpeed * Time.deltaTime);
+            yield return null;
+        }
+        while (!Mathf.Approximately(transform.position.y, tilePos.y))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, tilePos.y),
+                _moveSpeed * Time.deltaTime);
+            yield return null;
+        }
+        _hasMoved = true;
     }
 }

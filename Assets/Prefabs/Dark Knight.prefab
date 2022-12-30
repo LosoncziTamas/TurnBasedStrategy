@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tileSpeed: 3
   _hasMoved: 0
+  _moveSpeed: 10
 --- !u!1 &6218393146488978588
 GameObject:
   m_ObjectHideFlags: 0
