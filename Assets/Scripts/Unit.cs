@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -53,7 +52,7 @@ public class Unit : MonoBehaviour
     {
         if (_playerType == _gameMaster.PlayerTurn)
         {
-            if (_gameMaster.SelectedUnit != null)
+            if (_gameMaster.HasSelectedUnit)
             {
                 _gameMaster.SelectedUnit.Selected = false;
             }

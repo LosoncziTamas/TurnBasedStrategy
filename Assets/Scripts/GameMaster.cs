@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
+    public bool HasSelectedUnit => SelectedUnit != null;
     public Unit SelectedUnit { get; set; }
+    public PlayerType PlayerTurn { get; private set; } = PlayerType.Blue;
 
-    public PlayerType PlayerTurn { get; set; } = PlayerType.Blue;
+    [SerializeField] private GameObject _selectedUnitSquare;
 
     public static void ResetTiles()
     {
@@ -21,12 +23,22 @@ public class GameMaster : MonoBehaviour
         {
             EndTurn();
         }
+
+        if (HasSelectedUnit)
+        {
+            _selectedUnitSquare.gameObject.SetActive(true);
+            _selectedUnitSquare.transform.position = SelectedUnit.transform.position;
+        }
+        else
+        {
+            _selectedUnitSquare.gameObject.SetActive(false);
+        }
     }
 
     private void EndTurn()
     {
         PlayerTurn = PlayerTurn == PlayerType.Blue ? PlayerType.Red : PlayerType.Blue;
-        if (SelectedUnit != null)
+        if (HasSelectedUnit)
         {
             SelectedUnit.Selected = false;
             SelectedUnit = null;

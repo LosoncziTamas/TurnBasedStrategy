@@ -5,7 +5,6 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite[] _sprites;
-    [SerializeField] private float _hoverAmount;
     [SerializeField] private LayerMask _obstacleLayer;
     [SerializeField] private Color _highlightedColor;
     [SerializeField] private bool _isWalkable;
@@ -18,17 +17,7 @@ public class Tile : MonoBehaviour
         var randomSpriteIndex = Random.Range(0, spriteCount);
         _spriteRenderer.sprite = _sprites[randomSpriteIndex];
     }
-
-    private void OnMouseEnter()
-    {
-        transform.localScale += Vector3.one * _hoverAmount;
-    }
     
-    private void OnMouseExit()
-    {
-        transform.localScale -= Vector3.one * _hoverAmount;
-    }
-
     public bool IsClear()
     {
         var obstacle = Physics2D.OverlapCircle(transform.position, 0.2f, _obstacleLayer);
@@ -49,7 +38,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        var unitCanWalkToThisTile = _isWalkable && _gameMaster.SelectedUnit != null;
+        var unitCanWalkToThisTile = _isWalkable && _gameMaster.HasSelectedUnit;
         if (unitCanWalkToThisTile)
         {
             _gameMaster.SelectedUnit.Move(transform.position);
