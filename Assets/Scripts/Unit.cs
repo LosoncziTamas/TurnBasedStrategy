@@ -1,16 +1,26 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public bool Selected { get; private set; }
+    public bool Selected { get; set; }
+    public bool HasMoved { get; set; }
     
+    [SerializeField] private PlayerType _playerType;
     [SerializeField] private int _tileSpeed;
-    [SerializeField] private bool _hasMoved;
     [SerializeField] private float _moveSpeed;
 
     private GameMaster _gameMaster;
-    
+
+    private void OnValidate()
+    {
+        if (_playerType == PlayerType.None)
+        {
+            Debug.LogError($"PlayerType is not set on {gameObject.name}.");
+        }
+    }
+
     private void Start()
     {
         _gameMaster = FindObjectOfType<GameMaster>();
@@ -24,8 +34,11 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            Select(this);
-            GetWalkableTiles();
+            var selected = Select(this);
+            if (selected)
+            {
+                GetWalkableTiles();
+            }
         }
     }
 
@@ -33,23 +46,28 @@ public class Unit : MonoBehaviour
     {
         Selected = false;
         _gameMaster.SelectedUnit = null;
-        _gameMaster.ResetTiles();
+        GameMaster.ResetTiles();
     }
 
-    private void Select(Unit toSelect)
+    private bool Select(Unit toSelect)
     {
-        if (_gameMaster.SelectedUnit != null)
+        if (_playerType == _gameMaster.PlayerTurn)
         {
-            _gameMaster.SelectedUnit.Selected = false;
+            if (_gameMaster.SelectedUnit != null)
+            {
+                _gameMaster.SelectedUnit.Selected = false;
+            }
+            Selected = true;
+            _gameMaster.SelectedUnit = toSelect;
+            GameMaster.ResetTiles();
+            return true;
         }
-        Selected = true;
-        _gameMaster.SelectedUnit = toSelect;
-        _gameMaster.ResetTiles();
+        return false;
     }
 
     private void GetWalkableTiles()
     {
-        if (_hasMoved)
+        if (HasMoved)
         {
             return;
         }
@@ -74,7 +92,7 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector2 tilePos)
     {
-        _gameMaster.ResetTiles();
+        GameMaster.ResetTiles();
         StartCoroutine(StartMovement(tilePos));
     }
 
@@ -92,6 +110,6 @@ public class Unit : MonoBehaviour
                 _moveSpeed * Time.deltaTime);
             yield return null;
         }
-        _hasMoved = true;
+        HasMoved = true;
     }
 }
