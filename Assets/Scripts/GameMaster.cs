@@ -48,6 +48,8 @@ public class GameMaster : MonoBehaviour
         foreach (var unit in allUnits)
         {
             unit.HasMoved = false;
+            unit.WeaponIcon.SetActive(false);
+            unit.HasAttacked = false;
         }
     }
 }

@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour
     public bool Selected { get; set; }
     public bool HasMoved { get; set; }
     public bool HasAttacked { get; set; }
+    public GameObject WeaponIcon => _weaponIcon; 
     
     [SerializeField] private PlayerType _playerType;
     [SerializeField] private int _tileSpeed;
@@ -15,7 +16,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private GameObject _weaponIcon;
 
     private GameMaster _gameMaster;
-    private List<Unit> _enemiesInRage = new();
+    private readonly List<Unit> _enemiesInRage = new();
 
     private void OnValidate()
     {
@@ -117,6 +118,7 @@ public class Unit : MonoBehaviour
             yield return null;
         }
         HasMoved = true;
+        ResetWeaponIcons();
         GetEnemies();
     }
 
@@ -132,7 +134,7 @@ public class Unit : MonoBehaviour
                 if (canAttack)
                 {
                     _enemiesInRage.Add(unit);
-                    _weaponIcon.gameObject.SetActive(true);
+                    unit.WeaponIcon.SetActive(true);
                 }
             }
         }

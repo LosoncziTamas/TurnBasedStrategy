@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerType: 1
   _tileSpeed: 3
-  _attackRange: 0
+  _attackRange: 7
   _moveSpeed: 7
   _weaponIcon: {fileID: 4373323748538537133}
 --- !u!114 &3326021816914711780
@@ -676,6 +676,10 @@ PrefabInstance:
     - target: {fileID: 6903826564383482639, guid: cf9dbbc7c1e214b7b87d9a87e72c97d7, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903826564383482639, guid: cf9dbbc7c1e214b7b87d9a87e72c97d7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf9dbbc7c1e214b7b87d9a87e72c97d7, type: 3}
