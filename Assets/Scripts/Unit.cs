@@ -1,16 +1,21 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
     public bool Selected { get; set; }
     public bool HasMoved { get; set; }
+    public bool HasAttacked { get; set; }
     
     [SerializeField] private PlayerType _playerType;
     [SerializeField] private int _tileSpeed;
+    [SerializeField] private int _attackRange;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private GameObject _weaponIcon;
 
     private GameMaster _gameMaster;
+    private List<Unit> _enemiesInRage = new();
 
     private void OnValidate()
     {
@@ -27,6 +32,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseDown()
     {
+        ResetWeaponIcons();
         if (Selected)
         {
             Unselect();
@@ -36,6 +42,7 @@ public class Unit : MonoBehaviour
             var selected = Select(this);
             if (selected)
             {
+                GetEnemies();
                 GetWalkableTiles();
             }
         }
@@ -73,20 +80,20 @@ public class Unit : MonoBehaviour
         var allTiles = FindObjectsOfType<Tile>();
         foreach (var tile in allTiles)
         {
-            if (HasEnoughSpeedToGetToTile(tile) && tile.IsClear())
+            if (WithinRange(transform, tile.transform, _tileSpeed) && tile.IsClear())
             {
                 tile.Highlight();
             }
         }
     }
 
-    private bool HasEnoughSpeedToGetToTile(Tile tile)
+    private static bool WithinRange(Transform self, Transform other, int range)
     {
-        Vector2 unitPos = transform.position;
-        Vector2 tilePos = tile.transform.position;
+        Vector2 unitPos = self.position;
+        Vector2 tilePos = other.position;
         var horizontalDistance = Mathf.Abs(tilePos.x - unitPos.x);
         var verticalDistance = Mathf.Abs(tilePos.y - unitPos.y);
-        return horizontalDistance + verticalDistance <= _tileSpeed;
+        return horizontalDistance + verticalDistance <= range;
     }
 
     public void Move(Vector2 tilePos)
@@ -110,5 +117,33 @@ public class Unit : MonoBehaviour
             yield return null;
         }
         HasMoved = true;
+        GetEnemies();
+    }
+
+    private void GetEnemies()
+    {
+        _enemiesInRage.Clear();
+        var units = FindObjectsOfType<Unit>();
+        foreach (var unit in units)
+        {
+            if (WithinRange(transform, unit.transform, _attackRange))
+            {
+                var canAttack = !HasAttacked && unit._playerType != _gameMaster.PlayerTurn;
+                if (canAttack)
+                {
+                    _enemiesInRage.Add(unit);
+                    _weaponIcon.gameObject.SetActive(true);
+                }
+            }
+        }
+    }
+
+    public void ResetWeaponIcons()
+    {
+        var units = FindObjectsOfType<Unit>();
+        foreach (var unit in units)
+        {
+            unit._weaponIcon.SetActive(false);
+        }
     }
 }
