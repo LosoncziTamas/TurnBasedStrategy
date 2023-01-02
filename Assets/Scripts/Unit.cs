@@ -12,9 +12,14 @@ public class Unit : MonoBehaviour
     [SerializeField] private PlayerType _playerType;
     [SerializeField] private int _tileSpeed;
     [SerializeField] private int _attackRange;
+    [SerializeField] private int _health;
+    [SerializeField] private int _attackDamage;
+    [SerializeField] private int _defenseDamage;
+    [SerializeField] private int _armor;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _weaponIcon;
 
+    private Camera _mainCamera;
     private GameMaster _gameMaster;
     private readonly List<Unit> _enemiesInRage = new();
 
@@ -28,7 +33,18 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
+        _mainCamera = Camera.main;
         _gameMaster = FindObjectOfType<GameMaster>();
+    }
+
+    private bool IsPotentialEnemyInRage()
+    {
+        return _gameMaster.HasSelectedUnit && _gameMaster.SelectedUnit._enemiesInRage.Count > 0;
+    }
+
+    private static bool UnitCanBeAttacked(Unit unit, Unit selectedUnit)
+    {
+        return unit && selectedUnit._enemiesInRage.Contains(unit) && !selectedUnit.HasAttacked;
     }
 
     private void OnMouseDown()
@@ -46,6 +62,36 @@ public class Unit : MonoBehaviour
                 GetEnemies();
                 GetWalkableTiles();
             }
+        }
+        if (!IsPotentialEnemyInRage())
+        {
+            return;
+        }
+        var col = Physics2D.OverlapCircle(_mainCamera.ScreenToWorldPoint(Input.mousePosition), 0.15f);
+        var unit = col.GetComponent<Unit>();
+        var selectedUnit = _gameMaster.SelectedUnit;
+        if (UnitCanBeAttacked(unit, selectedUnit))
+        {
+            _gameMaster.SelectedUnit.Attack(unit);
+        }
+    }
+
+    private void Attack(Unit enemy)
+    {
+        HasAttacked = true;
+        var enemyDamage = Mathf.Max(_attackDamage - enemy._armor, 0);
+        var myDamage = Mathf.Max(enemy._defenseDamage - _armor, 0);
+        enemy._health -= enemyDamage;
+        _health -= myDamage;
+        if (enemy._health <= 0)
+        {
+            Destroy(enemy.gameObject);
+            GetWalkableTiles();
+        }
+        if (_health <= 0)
+        {
+            GameMaster.ResetTiles();
+            Destroy(gameObject);
         }
     }
 

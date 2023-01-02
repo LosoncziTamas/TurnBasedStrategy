@@ -268,6 +268,10 @@ MonoBehaviour:
   _playerType: 2
   _tileSpeed: 3
   _attackRange: 7
+  _health: 5
+  _attackDamage: 3
+  _defenseDamage: 2
+  _armor: 1
   _moveSpeed: 7
   _weaponIcon: {fileID: 8694137939855036440}
 --- !u!114 &1935503399884843860
