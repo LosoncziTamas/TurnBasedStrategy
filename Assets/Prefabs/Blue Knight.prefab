@@ -193,6 +193,7 @@ MonoBehaviour:
   _armor: 1
   _moveSpeed: 7
   _weaponIcon: {fileID: 4373323748538537133}
+  _damageIconPrefab: {fileID: 7298405647598236232, guid: b070dd727c3e448a0924859a2f44e440, type: 3}
 --- !u!114 &3326021816914711780
 MonoBehaviour:
   m_ObjectHideFlags: 0

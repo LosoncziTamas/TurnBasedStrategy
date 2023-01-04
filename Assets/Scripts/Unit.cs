@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private int _armor;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _weaponIcon;
+    [SerializeField] private DamageIcon _damageIconPrefab;
 
     private Camera _mainCamera;
     private GameMaster _gameMaster;
@@ -81,8 +82,18 @@ public class Unit : MonoBehaviour
         HasAttacked = true;
         var enemyDamage = Mathf.Max(_attackDamage - enemy._armor, 0);
         var myDamage = Mathf.Max(enemy._defenseDamage - _armor, 0);
-        enemy._health -= enemyDamage;
-        _health -= myDamage;
+        if (enemyDamage > 0)
+        {
+            enemy._health -= enemyDamage;
+            var damageIcon = Instantiate(_damageIconPrefab, enemy.transform.position, Quaternion.identity);
+            damageIcon.Setup(enemyDamage);
+        }
+        if (myDamage > 0)
+        {
+            _health -= myDamage;
+            var damageIcon = Instantiate(_damageIconPrefab, transform.position, Quaternion.identity);
+            damageIcon.Setup(myDamage);
+        }
         if (enemy._health <= 0)
         {
             Destroy(enemy.gameObject);

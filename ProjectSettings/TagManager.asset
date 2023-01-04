@@ -44,3 +44,6 @@ TagManager:
   - name: Cursor
     uniqueID: 3142591021
     locked: 0
+  - name: Damage Icons
+    uniqueID: 3579766905
+    locked: 0
