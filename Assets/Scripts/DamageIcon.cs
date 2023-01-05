@@ -6,6 +6,7 @@ public class DamageIcon : MonoBehaviour
     [SerializeField] private Sprite[] _damageSprites;
     [SerializeField] private float _lifeTime;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private GameObject _effectPrefab;
 
     public void Setup(int damage)
     {
@@ -20,6 +21,7 @@ public class DamageIcon : MonoBehaviour
 
     private void Destruction()
     {
+        Instantiate(_effectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

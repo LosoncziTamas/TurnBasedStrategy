@@ -107,6 +107,7 @@ MonoBehaviour:
   - {fileID: -161510492, guid: efc3996799d5f4e0bb9e7a14521dc193, type: 3}
   _lifeTime: 1.5
   _spriteRenderer: {fileID: 2543209120684371363}
+  _effectPrefab: {fileID: 7893267384774719066, guid: 176bd71a12c6e4a2bbe336b23ed8dd13, type: 3}
 --- !u!95 &5693176990249343135
 Animator:
   serializedVersion: 4
