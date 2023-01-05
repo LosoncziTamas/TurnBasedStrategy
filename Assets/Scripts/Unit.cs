@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    private static readonly int ShakeTriggerId = Animator.StringToHash("Shake");
+    
     public bool Selected { get; set; }
     public bool HasMoved { get; set; }
     public bool HasAttacked { get; set; }
@@ -22,6 +24,7 @@ public class Unit : MonoBehaviour
 
     private Camera _mainCamera;
     private GameMaster _gameMaster;
+    private Animator _cameraAnimator;
     private readonly List<Unit> _enemiesInRage = new();
 
     private void OnValidate()
@@ -35,6 +38,7 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         _mainCamera = Camera.main;
+        _cameraAnimator = _mainCamera.GetComponent<Animator>();
         _gameMaster = FindObjectOfType<GameMaster>();
     }
 
@@ -79,6 +83,7 @@ public class Unit : MonoBehaviour
 
     private void Attack(Unit enemy)
     {
+        _cameraAnimator.SetTrigger(ShakeTriggerId);
         HasAttacked = true;
         var enemyDamage = Mathf.Max(_attackDamage - enemy._armor, 0);
         var myDamage = Mathf.Max(enemy._defenseDamage - _armor, 0);
