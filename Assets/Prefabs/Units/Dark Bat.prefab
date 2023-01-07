@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 7483514657972280822}
   - component: {fileID: 5050031737368101045}
   - component: {fileID: 7728825619043443517}
-  - component: {fileID: 5106186664029429260}
+  - component: {fileID: 5638494044643574253}
   m_Layer: 6
   m_Name: Dark Bat
   m_TagString: Untagged
@@ -229,30 +229,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51385f724d73241ce90f7d8149408dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerType: 2
   _tileSpeed: 3
-  _attackRange: 2
+  _attackRange: 3
   _health: 2
   _attackDamage: 2
-  _defenseDamage: 2
+  _defenseDamage: 1
   _armor: 1
+  _playerType: 2
   _moveSpeed: 4
   _weaponIcon: {fileID: 554976618915828760}
   _damageIconPrefab: {fileID: 7298405647598236232, guid: b070dd727c3e448a0924859a2f44e440, type: 3}
   _deathEffectPrefab: {fileID: 6795791247103690060, guid: c53f9e93a112e4c7b8b402dbf83f921b, type: 3}
---- !u!65 &5106186664029429260
-BoxCollider:
+--- !u!61 &5638494044643574253
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5798013298822473423}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6607696801721131334
 GameObject:
   m_ObjectHideFlags: 0

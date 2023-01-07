@@ -11,13 +11,16 @@ public class Unit : MonoBehaviour
     public bool HasAttacked { get; set; }
     public GameObject WeaponIcon => _weaponIcon; 
     
+    [Header("Battle Properties")]
+    [Tooltip("Number of tiles a unit can move in a turn.")] [SerializeField] private int _tileSpeed;
+    [Tooltip("Range of attack in terms of tiles.")] [SerializeField] private int _attackRange;
+    [Tooltip("Total health.")] [SerializeField] private int _health;
+    [Tooltip("Damage the unit can inflict during attack.")] [SerializeField] private int _attackDamage;
+    [Tooltip("Damage the unit suffers during attack.")] [SerializeField] private int _defenseDamage;
+    [Tooltip("Defense point which reduces the amount of damage.")] [SerializeField] private int _armor;
+    
+    [Header("Other")]
     [SerializeField] private PlayerType _playerType;
-    [SerializeField] private int _tileSpeed;
-    [SerializeField] private int _attackRange;
-    [SerializeField] private int _health;
-    [SerializeField] private int _attackDamage;
-    [SerializeField] private int _defenseDamage;
-    [SerializeField] private int _armor;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _weaponIcon;
     [SerializeField] private DamageIcon _damageIconPrefab;
