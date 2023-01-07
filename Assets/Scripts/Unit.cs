@@ -21,6 +21,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _weaponIcon;
     [SerializeField] private DamageIcon _damageIconPrefab;
+    [SerializeField] private GameObject _deathEffectPrefab;
 
     private Camera _mainCamera;
     private GameMaster _gameMaster;
@@ -101,11 +102,13 @@ public class Unit : MonoBehaviour
         }
         if (enemy._health <= 0)
         {
+            Instantiate(_deathEffectPrefab, enemy.transform.position, Quaternion.identity);
             Destroy(enemy.gameObject);
             GetWalkableTiles();
         }
         if (_health <= 0)
         {
+            Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
             GameMaster.ResetTiles();
             Destroy(gameObject);
         }
