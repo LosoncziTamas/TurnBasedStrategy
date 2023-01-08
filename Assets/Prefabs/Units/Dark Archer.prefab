@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 4207072404161253132}
   - component: {fileID: 3903279514875630966}
   - component: {fileID: 7008762517481917035}
+  - component: {fileID: -5071967811413272085}
   m_Layer: 6
   m_Name: Dark Archer
   m_TagString: Untagged
@@ -334,6 +335,8 @@ MonoBehaviour:
   _attackDamage: 2
   _defenseDamage: 1
   _armor: 1
+  _kingHealth: {fileID: 0}
+  _isKing: 0
   _playerType: 2
   _moveSpeed: 1
   _weaponIcon: {fileID: 7696140033191483756}
@@ -352,6 +355,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverAmount: 0.2
+--- !u!114 &-5071967811413272085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047529144007320954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104045cbd2ebc4f169b3f7d46815feab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 15
+  _text: {fileID: 0}
 --- !u!1 &4330618934754379527
 GameObject:
   m_ObjectHideFlags: 0

@@ -4917,6 +4917,7 @@ GameObject:
   - component: {fileID: 7539693253903136852}
   - component: {fileID: 7253425625007856947}
   - component: {fileID: 6181853634366766648}
+  - component: {fileID: 8388075194858881814}
   m_Layer: 6
   m_Name: Blue Village
   m_TagString: Untagged
@@ -5033,3 +5034,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goldPerTurn: 10
   _playerType: 1
+--- !u!114 &8388075194858881814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897707145722938621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104045cbd2ebc4f169b3f7d46815feab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 30
+  _text: {fileID: 0}

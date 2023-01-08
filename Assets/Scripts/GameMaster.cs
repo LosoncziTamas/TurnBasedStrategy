@@ -8,6 +8,19 @@ public class GameMaster : MonoBehaviour
     public bool HasSelectedUnit => SelectedUnit != null;
     public Unit SelectedUnit { get; set; }
     public PlayerType PlayerTurn { get; private set; } = PlayerType.Blue;
+    public BarrackItem PurchasedItem { get; set; }
+
+    public int BluePlayerGold
+    {
+        get => _bluePlayerGold;
+        set => _bluePlayerGold = value;
+    }
+
+    public int RedPlayerGold
+    {
+        get => _redPlayerGold;
+        set => _redPlayerGold = value;   
+    }
 
     [SerializeField] private GameObject _selectedUnitSquare;
     [SerializeField] private Image _playerIndicator;
@@ -17,6 +30,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private int _redPlayerGold = 100;
     [SerializeField] private TextMeshProUGUI _redPlayerGoldText;
     [SerializeField] private TextMeshProUGUI _bluePlayerGoldText;
+    [SerializeField] private Barrack _barrack;
 
     public static void ResetTiles()
     {
@@ -70,8 +84,8 @@ public class GameMaster : MonoBehaviour
         }
         UpdateGoldText();
     }
-    
-    private void UpdateGoldText()
+
+    public void UpdateGoldText()
     {
         _bluePlayerGoldText.text = _bluePlayerGold.ToString();
         _redPlayerGoldText.text = _redPlayerGold.ToString();
@@ -95,5 +109,6 @@ public class GameMaster : MonoBehaviour
             unit.WeaponIcon.SetActive(false);
             unit.HasAttacked = false;
         }
+        _barrack.CloseMenus();
     }
 }

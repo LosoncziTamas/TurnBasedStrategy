@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 8884240869314645816}
   - component: {fileID: 5064632410457415897}
   - component: {fileID: 3326021816914711780}
+  - component: {fileID: -7217177591082975616}
   m_Layer: 6
   m_Name: Blue Knight
   m_TagString: Untagged
@@ -190,6 +191,8 @@ MonoBehaviour:
   _attackDamage: 3
   _defenseDamage: 2
   _armor: 1
+  _kingHealth: {fileID: 0}
+  _isKing: 0
   _playerType: 1
   _moveSpeed: 7
   _weaponIcon: {fileID: 4373323748538537133}
@@ -208,6 +211,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverAmount: 0.2
+--- !u!114 &-7217177591082975616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2860596164531636604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104045cbd2ebc4f169b3f7d46815feab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 20
+  _text: {fileID: 0}
 --- !u!1 &4262155085127590565
 GameObject:
   m_ObjectHideFlags: 0
