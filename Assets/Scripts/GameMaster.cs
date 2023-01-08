@@ -1,4 +1,7 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
@@ -7,6 +10,13 @@ public class GameMaster : MonoBehaviour
     public PlayerType PlayerTurn { get; private set; } = PlayerType.Blue;
 
     [SerializeField] private GameObject _selectedUnitSquare;
+    [SerializeField] private Image _playerIndicator;
+    [SerializeField] private Sprite _redPlayerIndicator;
+    [SerializeField] private Sprite _bluePlayerIndicator;
+    [SerializeField] private int _bluePlayerGold = 100;
+    [SerializeField] private int _redPlayerGold = 100;
+    [SerializeField] private TextMeshProUGUI _redPlayerGoldText;
+    [SerializeField] private TextMeshProUGUI _bluePlayerGoldText;
 
     public static void ResetTiles()
     {
@@ -15,6 +25,11 @@ public class GameMaster : MonoBehaviour
         {
             tile.ResetToDefault();
         }
+    }
+
+    private void Start()
+    {
+        GetGoldIncome(PlayerType.Red);
     }
 
     private void Update()
@@ -35,9 +50,38 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    private void GetGoldIncome(PlayerType playerTurn)
+    {
+        var villages = FindObjectsOfType<Village>();
+        foreach (var village in villages)
+        {
+            if (village.PlayerType != playerTurn)
+            {
+                continue;
+            }
+            if (playerTurn == PlayerType.Blue)
+            {
+                _bluePlayerGold += village.GoldPerTurn;
+            }
+            else
+            {
+                _redPlayerGold += village.GoldPerTurn;
+            }
+        }
+        UpdateGoldText();
+    }
+    
+    private void UpdateGoldText()
+    {
+        _bluePlayerGoldText.text = _bluePlayerGold.ToString();
+        _redPlayerGoldText.text = _redPlayerGold.ToString();
+    }
+    
     private void EndTurn()
     {
         PlayerTurn = PlayerTurn == PlayerType.Blue ? PlayerType.Red : PlayerType.Blue;
+        _playerIndicator.sprite = PlayerTurn == PlayerType.Blue ? _bluePlayerIndicator : _redPlayerIndicator;
+        GetGoldIncome(PlayerTurn);
         if (HasSelectedUnit)
         {
             SelectedUnit.Selected = false;

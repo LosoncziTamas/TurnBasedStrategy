@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531826413383013391}
   - component: {fileID: 5969114107126525900}
-  m_Layer: 0
+  - component: {fileID: 138999599570630843}
+  - component: {fileID: 2384389964311368211}
+  m_Layer: 6
   m_Name: Dark Village
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,6 +88,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &138999599570630843
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501242028819970970}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.017042339, y: 0.18381259}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.4877014, y: 0.30445468}
+    oldSize: {x: 1.3857143, y: 0.94}
+    newSize: {x: 1.3857143, y: 0.94}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.85, y: 0.61}
+  m_EdgeRadius: 0
+--- !u!114 &2384389964311368211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501242028819970970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f66c4dc11ab46ca99d1a1118d05a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldPerTurn: 10
+  _playerType: 2
 --- !u!1 &3336667503338395008
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +139,7 @@ GameObject:
   - component: {fileID: 1210928787148155466}
   - component: {fileID: 3573706915534464807}
   - component: {fileID: 4597362799707353170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4917,7 +4959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4994445437724561573}
   - component: {fileID: 2397773598072135168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

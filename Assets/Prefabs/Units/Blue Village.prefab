@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7573085593914814113}
   - component: {fileID: 7466919352604501472}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 841332573946906173}
   - component: {fileID: 7199310617746480346}
   - component: {fileID: 2101089420750053316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4915,7 +4915,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1481603838427374351}
   - component: {fileID: 7539693253903136852}
-  m_Layer: 0
+  - component: {fileID: 7253425625007856947}
+  - component: {fileID: 6181853634366766648}
+  m_Layer: 6
   m_Name: Blue Village
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4991,3 +4993,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &7253425625007856947
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897707145722938621}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0012173653, y: 0.18016078}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5011689, y: 0.30833963}
+    oldSize: {x: 1.0414286, y: 0.94}
+    newSize: {x: 7.29, y: 6.58}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.86, y: 0.45}
+  m_EdgeRadius: 0
+--- !u!114 &6181853634366766648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897707145722938621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f66c4dc11ab46ca99d1a1118d05a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldPerTurn: 10
+  _playerType: 1

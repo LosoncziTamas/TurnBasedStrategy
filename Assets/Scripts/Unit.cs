@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class Unit : MonoBehaviour
     [Tooltip("Defense point which reduces the amount of damage.")] [SerializeField] private int _armor;
     
     [Header("Other")]
+    [SerializeField] private TextMeshProUGUI _kingHealth;
+    [SerializeField] private bool _isKing;
     [SerializeField] private PlayerType _playerType;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private GameObject _weaponIcon;
@@ -44,6 +48,7 @@ public class Unit : MonoBehaviour
         _mainCamera = Camera.main;
         _cameraAnimator = _mainCamera.GetComponent<Animator>();
         _gameMaster = FindObjectOfType<GameMaster>();
+        UpdateKingHealth();
     }
 
     private bool IsPotentialEnemyInRage()
@@ -85,6 +90,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private void UpdateKingHealth()
+    {
+        if (_isKing)
+        {
+            _kingHealth.text = _health.ToString();
+        }
+    }
+
     private void Attack(Unit enemy)
     {
         _cameraAnimator.SetTrigger(ShakeTriggerId);
@@ -96,12 +109,14 @@ public class Unit : MonoBehaviour
             enemy._health -= enemyDamage;
             var damageIcon = Instantiate(_damageIconPrefab, enemy.transform.position, Quaternion.identity);
             damageIcon.Setup(enemyDamage);
+            enemy.UpdateKingHealth();
         }
         if (myDamage > 0)
         {
             _health -= myDamage;
             var damageIcon = Instantiate(_damageIconPrefab, transform.position, Quaternion.identity);
             damageIcon.Setup(myDamage);
+            UpdateKingHealth();
         }
         if (enemy._health <= 0)
         {

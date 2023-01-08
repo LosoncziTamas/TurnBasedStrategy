@@ -56,6 +56,8 @@ MonoBehaviour:
   _attackDamage: 7
   _defenseDamage: 2
   _armor: 5
+  _kingHealth: {fileID: 0}
+  _isKing: 1
   _playerType: 1
   _moveSpeed: 2
   _weaponIcon: {fileID: 6702359676241786285}
