@@ -7,7 +7,7 @@ public class GameMaster : MonoBehaviour
 {
     public bool HasSelectedUnit => SelectedUnit != null;
     public Unit SelectedUnit { get; set; }
-    public PlayerType PlayerTurn { get; private set; } = PlayerType.Blue;
+    public PlayerType PlayerTurn { get; private set; } = PlayerType.Red;
     public BarrackItem PurchasedItem { get; set; }
 
     public int BluePlayerGold
