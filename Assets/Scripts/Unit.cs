@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,8 +12,12 @@ public class Unit : MonoBehaviour
     public bool Selected { get; set; }
     public bool HasMoved { get; set; }
     public bool HasAttacked { get; set; }
-    public GameObject WeaponIcon => _weaponIcon; 
-    
+    public GameObject WeaponIcon => _weaponIcon;
+    public int Health => _health;
+    public int AttackDamage => _attackDamage;
+    public int DefenseDamage => _defenseDamage;
+    public int Armor => _armor;
+
     [Header("Battle Properties")]
     [Tooltip("Number of tiles a unit can move in a turn.")] [SerializeField] private int _tileSpeed;
     [Tooltip("Range of attack in terms of tiles.")] [SerializeField] private int _attackRange;
@@ -130,6 +135,7 @@ public class Unit : MonoBehaviour
             GameMaster.ResetTiles();
             Destroy(gameObject);
         }
+        _gameMaster.UpdateStatsPanel();
     }
 
     private void Unselect()
@@ -229,6 +235,14 @@ public class Unit : MonoBehaviour
         foreach (var unit in units)
         {
             unit._weaponIcon.SetActive(false);
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            _gameMaster.ToggleStatsPanel(this);
         }
     }
 }

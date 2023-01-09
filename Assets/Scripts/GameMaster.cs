@@ -31,6 +31,8 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _redPlayerGoldText;
     [SerializeField] private TextMeshProUGUI _bluePlayerGoldText;
     [SerializeField] private Barrack _barrack;
+    [SerializeField] private Vector2 _statsPanelShift;
+    [SerializeField] private Unit _viewedUnit;
 
     public static void ResetTiles()
     {
@@ -38,6 +40,32 @@ public class GameMaster : MonoBehaviour
         foreach (var tile in allTiles)
         {
             tile.ResetToDefault();
+        }
+    }
+
+    public void ToggleStatsPanel(Unit unit)
+    {
+        var newUnitSelected = unit != _viewedUnit;
+        var panel = StatsPanel.Instance;
+        if (newUnitSelected)
+        {
+            panel.SetVisible(true);
+            panel.transform.position = (Vector2)unit.transform.position + _statsPanelShift;
+            _viewedUnit = unit;
+            UpdateStatsPanel();
+        }
+        else
+        {
+            panel.SetVisible(false);
+            _viewedUnit = null;
+        }
+    }
+
+    public void UpdateStatsPanel()
+    {
+        if (_viewedUnit != null)
+        {
+            StatsPanel.Instance.UpdateStats(_viewedUnit);
         }
     }
 
