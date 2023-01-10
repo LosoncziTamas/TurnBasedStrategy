@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour
 {
     private static readonly int ShakeTriggerId = Animator.StringToHash("Shake");
+    private const string ArcherTag = "Archer";
     
     public bool Selected { get; set; }
     public bool HasMoved { get; set; }
@@ -103,6 +104,21 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private bool ShouldInflictDamageOnSelf(Unit enemy, int selfDamage)
+    {
+        var isArcher = transform.CompareTag(ArcherTag);
+        if (!isArcher)
+        {
+            return selfDamage > 0;
+        }
+        var enemyIsArcher = enemy.CompareTag(ArcherTag);
+        if (enemyIsArcher)
+        {
+            return selfDamage > 0;
+        }
+        return WithinRange(transform, enemy.transform, 1) && selfDamage > 0;
+    }
+
     private void Attack(Unit enemy)
     {
         _cameraAnimator.SetTrigger(ShakeTriggerId);
@@ -116,7 +132,7 @@ public class Unit : MonoBehaviour
             damageIcon.Setup(enemyDamage);
             enemy.UpdateKingHealth();
         }
-        if (myDamage > 0)
+        if (ShouldInflictDamageOnSelf(enemy, myDamage))
         {
             _health -= myDamage;
             var damageIcon = Instantiate(_damageIconPrefab, transform.position, Quaternion.identity);
@@ -128,12 +144,14 @@ public class Unit : MonoBehaviour
             Instantiate(_deathEffectPrefab, enemy.transform.position, Quaternion.identity);
             Destroy(enemy.gameObject);
             GetWalkableTiles();
+            _gameMaster.RemoveStatsPanel(enemy);
         }
         if (_health <= 0)
         {
             Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
             GameMaster.ResetTiles();
             Destroy(gameObject);
+            _gameMaster.RemoveStatsPanel(this);
         }
         _gameMaster.UpdateStatsPanel();
     }
@@ -209,6 +227,7 @@ public class Unit : MonoBehaviour
         HasMoved = true;
         ResetWeaponIcons();
         GetEnemies();
+        _gameMaster.MoveStatsPanel(this);
     }
 
     private void GetEnemies()

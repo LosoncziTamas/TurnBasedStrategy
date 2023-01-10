@@ -11,11 +11,6 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _arrowText;
     [SerializeField] private CanvasGroup _canvasGroup;
 
-    public TextMeshProUGUI HeartText => _heartText;
-    public TextMeshProUGUI ShieldText => _shieldText;
-    public TextMeshProUGUI SwordText => _swordText;
-    public TextMeshProUGUI ArrowText => _arrowText;
-    
     private void Awake()
     {
         Instance = this;

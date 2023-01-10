@@ -139,4 +139,21 @@ public class GameMaster : MonoBehaviour
         }
         _barrack.CloseMenus();
     }
+
+    public void MoveStatsPanel(Unit unit)
+    {
+        if (unit == _viewedUnit)
+        {
+            StatsPanel.Instance.transform.position = (Vector2)unit.transform.position + _statsPanelShift;
+        }
+    }
+
+    public void RemoveStatsPanel(Unit unit)
+    {
+        if (unit == _viewedUnit)
+        {
+            StatsPanel.Instance.SetVisible(false);
+            _viewedUnit = null;
+        }
+    }
 }

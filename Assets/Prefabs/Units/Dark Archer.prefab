@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: -5071967811413272085}
   m_Layer: 6
   m_Name: Dark Archer
-  m_TagString: Untagged
+  m_TagString: Archer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   _attackRange: 4
   _health: 5
   _attackDamage: 2
-  _defenseDamage: 1
+  _defenseDamage: 2
   _armor: 1
   _kingHealth: {fileID: 0}
   _isKing: 0
