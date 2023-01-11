@@ -35,6 +35,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private GameObject _weaponIcon;
     [SerializeField] private DamageIcon _damageIconPrefab;
     [SerializeField] private GameObject _deathEffectPrefab;
+    [SerializeField] private AudioSource _audioSource;
 
     private Camera _mainCamera;
     private GameMaster _gameMaster;
@@ -55,6 +56,10 @@ public class Unit : MonoBehaviour
         _cameraAnimator = _mainCamera.GetComponent<Animator>();
         _gameMaster = FindObjectOfType<GameMaster>();
         UpdateKingHealth();
+        if (!_audioSource)
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
     }
 
     private bool IsPotentialEnemyInRage()
@@ -79,6 +84,7 @@ public class Unit : MonoBehaviour
             var selected = Select(this);
             if (selected)
             {
+                _audioSource.Play();
                 GetEnemies();
                 GetWalkableTiles();
             }
