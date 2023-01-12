@@ -154,6 +154,10 @@ public class Unit : MonoBehaviour
         }
         if (_health <= 0)
         {
+            if (_isKing)
+            {
+                
+            }
             Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
             GameMaster.ResetTiles();
             Destroy(gameObject);
